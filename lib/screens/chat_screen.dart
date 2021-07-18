@@ -3,6 +3,8 @@ import 'package:flash_chat/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+
+//creating instance of firestore
 final _firestore = Firestore.instance;
 FirebaseUser loggedInUser;
 
@@ -67,6 +69,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     child: TextField(
                       controller: messageTextController,
                       onChanged: (value) {
+                        //text entered in this text field is updated to messageText
                         messageText = value;
                       },
                       decoration: kMessageTextFieldDecoration,
@@ -75,6 +78,8 @@ class _ChatScreenState extends State<ChatScreen> {
                   FlatButton(
                     onPressed: () {
                       messageTextController.clear();
+
+                      //adding message to firestore 'messages' collection
                       _firestore.collection('messages').add({
                         'text': messageText,
                         'sender': loggedInUser.email,

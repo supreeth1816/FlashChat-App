@@ -21,7 +21,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+
+      //Using Modal Progress HUD to implement spinner
       body: ModalProgressHUD(
+
+        //inAsyncCall accepts a boolean to show spinner or not
         inAsyncCall: showSpinner,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.0),
@@ -30,6 +34,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Flexible(
+
+                //Hero widget with a tag
+                //Hero performs animation for shared elements
                 child: Hero(
                   tag: 'logo',
                   child: Container(
@@ -69,6 +76,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 title: 'Register',
                 colour: Colors.blueAccent,
                 onPressed: () async {
+
+                  //Spinner starts
                   setState(() {
                     showSpinner = true;
                   });
@@ -78,7 +87,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     if (newUser != null) {
                       Navigator.pushNamed(context, ChatScreen.id);
                     }
-
+                    //Spinner stops
                     setState(() {
                       showSpinner = false;
                     });
